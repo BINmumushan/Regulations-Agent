@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+.idea/
+.tools/
+*.log
+
+data/pdfs/*
+!data/pdfs/.gitkeep
+data/ocr_cache/*
+!data/ocr_cache/.gitkeep
