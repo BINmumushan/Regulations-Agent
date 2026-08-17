@@ -382,13 +382,13 @@ class AnswerResult:
 
 
 def get_llm() -> ChatOpenAI:
-    if not get_env("OPENAI_API_KEY"):
+    if not get_env("DEEPSEEK_API_KEY"):
         raise RuntimeError("未配置 OPENAI_API_KEY，请先复制 .env.example 为 .env 并填写。")
     return ChatOpenAI(
         model=get_env("LLM_MODEL", "gpt-4o-mini"),
         temperature=get_float_env("LLM_TEMPERATURE", 0.0),
-        api_key=get_env("OPENAI_API_KEY"),
-        base_url=get_env("OPENAI_BASE_URL") or None,
+        api_key=get_env("DEEPSEEK_API_KEY"),
+        base_url=get_env("DEEPSEEK_BASE_URL") or None,
     )
 
 
