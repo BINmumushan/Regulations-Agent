@@ -11,3 +11,7 @@ data/pdfs/*
 !data/pdfs/.gitkeep
 data/ocr_cache/*
 !data/ocr_cache/.gitkeep
+
+# Keep fastembed model cache for deployment
+!models/
+!models/fastembed_cache/

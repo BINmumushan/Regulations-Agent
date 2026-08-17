@@ -14,8 +14,10 @@ services:
         value: local
       - key: EMBEDDING_MODEL
         value: BAAI/bge-small-zh-v1.5
+      - key: FASTEMBED_CACHE_DIR
+        value: /app/.cache/fastembed
       - key: TOP_K
-        value: "10"
+        value: "6"
       - key: SCORE_THRESHOLD
         value: "0.05"
       - key: CHUNK_SIZE
@@ -23,12 +25,12 @@ services:
       - key: CHUNK_OVERLAP
         value: "200"
       - key: RETRIEVE_LIMIT
-        value: "24"
+        value: "10"
       - key: SUMMARY_RETRIEVE_LIMIT
-        value: "200"
+        value: "20"
       - key: SUMMARY_FULL_SOURCE_MAX
-        value: "120"
+        value: "30"
       - key: SUMMARY_SEED_LIMIT
-        value: "120"
+        value: "60"
       - key: DEMO_PASSWORD
         sync: false

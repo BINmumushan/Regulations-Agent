@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import os
 from pathlib import Path
 
 # 先加载配置（设置镜像环境变量），再导入 fastembed，保证模型下载使用国内镜像。
@@ -22,8 +23,12 @@ logger = logging.getLogger(__name__)
 def get_embeddings() -> Embeddings:
     provider = get_env("EMBEDDING_PROVIDER", "openai").strip().lower()
     if provider == "local":
+        # Render 等环境默认 /tmp，但打包进镜像的模型在 /app/.cache/fastembed
+        cache_dir = get_env("FASTEMBED_CACHE_DIR") or "/tmp/fastembed_cache"
+        logger.warning("[EMBEDDING-DEBUG] provider=local | model=%s | cache_dir=%s", get_env("EMBEDDING_MODEL", "BAAI/bge-small-zh-v1.5"), cache_dir)
         return FastEmbedEmbeddings(
-            model_name=get_env("EMBEDDING_MODEL", "BAAI/bge-small-zh-v1.5")
+            model_name=get_env("EMBEDDING_MODEL", "BAAI/bge-small-zh-v1.5"),
+            cache_dir=cache_dir,
         )
     if provider == "openai":
         if not get_env("OPENAI_API_KEY"):

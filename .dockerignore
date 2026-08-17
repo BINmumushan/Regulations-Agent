@@ -17,3 +17,7 @@ PASSON.markdown
 debug_retrieval.py
 self_check_learning.py
 tests/
+
+# Keep pre-downloaded fastembed model cache in image
+!models/
+!models/fastembed_cache/
