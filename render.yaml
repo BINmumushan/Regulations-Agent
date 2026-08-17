@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: regulations-agent
+    runtime: docker
+    plan: free
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_BASE_URL
+        value: https://api.deepseek.com/v1
+      - key: LLM_MODEL
+        value: deepseek-v4-flash
+      - key: EMBEDDING_PROVIDER
+        value: local
+      - key: EMBEDDING_MODEL
+        value: BAAI/bge-small-zh-v1.5
+      - key: TOP_K
+        value: "10"
+      - key: SCORE_THRESHOLD
+        value: "0.05"
+      - key: CHUNK_SIZE
+        value: "1000"
+      - key: CHUNK_OVERLAP
+        value: "200"
+      - key: RETRIEVE_LIMIT
+        value: "24"
+      - key: SUMMARY_RETRIEVE_LIMIT
+        value: "200"
+      - key: SUMMARY_FULL_SOURCE_MAX
+        value: "120"
+      - key: SUMMARY_SEED_LIMIT
+        value: "120"
+      - key: DEMO_PASSWORD
+        sync: false
