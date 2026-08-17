@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import logging
 import secrets
 import shutil
 import threading
 import time
+import traceback
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import quote
@@ -190,8 +192,12 @@ def ask(
             history=[turn.model_dump() for turn in payload.history],
         )
     except FileNotFoundError as exc:
+        logging.getLogger(__name__).warning("[ASK-DEBUG] FileNotFoundError: %s", exc)
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except Exception as exc:
+        logging.getLogger(__name__).error(
+            "[ASK-DEBUG] 问答失败完整堆栈:\n%s", traceback.format_exc()
+        )
         raise HTTPException(status_code=500, detail=f"问答失败: {exc}") from exc
 
 

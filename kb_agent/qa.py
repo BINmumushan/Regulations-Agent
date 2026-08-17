@@ -384,11 +384,22 @@ class AnswerResult:
 def get_llm() -> ChatOpenAI:
     if not get_env("OPENAI_API_KEY"):
         raise RuntimeError("未配置 OPENAI_API_KEY，请先复制 .env.example 为 .env 并填写。")
+    _base_url = get_env("OPENAI_BASE_URL") or None
+    _model = get_env("LLM_MODEL", "gpt-4o-mini")
+    _key = get_env("OPENAI_API_KEY")
+    logger.warning(
+        "[LLM-DEBUG] base_url=%r | model=%r | key=%s...%s | key_len=%d",
+        _base_url,
+        _model,
+        _key[:6],
+        _key[-4:],
+        len(_key),
+    )
     return ChatOpenAI(
-        model=get_env("LLM_MODEL", "gpt-4o-mini"),
+        model=_model,
         temperature=get_float_env("LLM_TEMPERATURE", 0.0),
-        api_key=get_env("OPENAI_API_KEY"),
-        base_url=get_env("OPENAI_BASE_URL") or None,
+        api_key=_key,
+        base_url=_base_url,
     )
 
 
