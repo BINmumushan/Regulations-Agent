@@ -4,9 +4,9 @@ services:
     runtime: docker
     plan: free
     envVars:
-      - key: OPENAI_API_KEY
+      - key: DEEPSEEK_API_KEY
         sync: false
-      - key: OPENAI_BASE_URL
+      - key: DEEPSEEK_BASE_URL
         value: https://api.deepseek.com/v1
       - key: LLM_MODEL
         value: deepseek-v4-flash
